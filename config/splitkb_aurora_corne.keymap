@@ -9,7 +9,7 @@
 #include <dt-bindings/zmk/bt.h>
 
 &nice_view_spi {
-    cs-gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>; 
+    cs-gpios = <&gpio0 22 GPIO_ACTIVE_HIGH>; 
 };
 
 / {
