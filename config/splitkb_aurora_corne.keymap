@@ -9,14 +9,6 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    chosen {
-        zephyr,display = &nice_view;  // Override Aurora Corne's OLED
-        zmk,physical-layout = &foostan_corne_6col_layout;
-    };
-};
-
-
-/ {
     keymap {
         compatible = "zmk,keymap";
         
