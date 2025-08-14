@@ -9,21 +9,98 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    macros {
+        umlaut_a: umlaut_a {
+            label = "umlaut_a";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp A>;
+        };
+        
+        umlaut_o: umlaut_o {
+            label = "umlaut_o";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp O>;
+        };
+        
+        umlaut_u: umlaut_u {
+            label = "umlaut_u";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp U>;
+        };
+
+        umlaut_a_upper: umlaut_a_upper {
+            label = "umlaut_a_upper";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp LS(A)>;
+        };
+        
+        umlaut_o_upper: umlaut_o_upper {
+            label = "umlaut_o_upper";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp LS(O)>;
+        };
+        
+        umlaut_u_upper: umlaut_u_upper {
+            label = "umlaut_u_upper";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp U &kp LS(U)>;
+        };
+        
+        umlaut_ss: umlaut_ss {
+            label = "umlaut_ss";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LALT &kp S>;
+        };
+    };
+
+    behaviors {
+        umlaut_a_mm: umlaut_a_mm {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_A_MM";
+            #binding-cells = <0>;
+            bindings = <&umlaut_a>, <&umlaut_a_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        
+        umlaut_o_mm: umlaut_o_mm {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_O_MM";
+            #binding-cells = <0>;
+            bindings = <&umlaut_o>, <&umlaut_o_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        
+        umlaut_u_mm: umlaut_u_mm {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_U_MM";
+            #binding-cells = <0>;
+            bindings = <&umlaut_u>, <&umlaut_u_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
         
         default_layer {
             display-name = "Base";
         // -----------------------------------------------------------------------------------------
-        //     | ESC/` |  Q  |  W  |  E  |  R  |  T  |               |  Z  |  U   |  I      |  O   |  P      | BKSP         |
+        //     | ESC  |  Q  |  W  |  E  |  R  |  T  |               |  Z  |  U   |  I      |  O   |  P      | BKSP         |
         //     | CTRL  |  A  |  S  |  D  |  F  |  G  |               |  H  |  J   |  K      |  L   |  ;      | SINGLE QUOTE |
         //     | SHFT  |  Y  |  X  |  C  |  V  |  B  |               |  N  |  M   |  ,      |  .   |  /      | SHIFT        |
         //                        | GUI | LWR | SPC |                | ENT | RSE  | ALT |
             bindings = <
-               &gresc    &kp Q &kp W &kp E &kp R &kp T               &kp Z &kp U  &kp I     &kp O   &kp P    &kp BSPC
-               &kp LCTRL &kp A &kp S &kp D &kp F &kp G               &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT 
-               &kp LSHFT &kp Y &kp X &kp C &kp V &kp B               &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RSHFT 
-                                      &kp LCMD &lt 1 TAB &lt SPACE 3   &kp RET &mo 2 &kp RALT
+               &kp ESC   &kp Q &kp W &kp E &kp R &kp T                 &kp Z &kp U  &kp I     &kp O   &kp P    &kp BSPC
+               &kp LCTRL &kp A &kp S &kp D &kp F &kp G                 &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT 
+               &kp LSHFT &kp Y &kp X &kp C &kp V &kp B                 &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RSHFT 
+                                      &kp LCMD &lt 1 TAB &lt 3 SPACE   &kp RET &mo 2 &kp RALT
             >;
         };
         
@@ -62,14 +139,14 @@
             display-name = "Special";
         // -----------------------------------------------------------------------------------------
         // |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
-        // |     |     |     |     |     |     |     |     |     |     |     |     |
+        // |     |  ä  |  ß  |     |     |     |     |  ü  |     |  ö  |     |     |
         // |     |     |     |     |     |     |     |     |     |     |     |     |
         //                   |     |     |     |     |     |     |     |
             bindings = <
             &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-            &none &none &none &none &none &none &none &none &none &none &none &none
-            &none &none &none &none &none &none &none &none &none &none &none &none
-                             &none &none &none &none &none &none &none
+            &none &none &none &none &none &none &none &umlaut_u_mm &none &umlaut_o_mm &none &none
+            &none &umlaut_a_mm &umlaut_ss &none &none &none &none &none &none &none &none &none
+                             &none &none &none &none &none &none
                 >;
         };
     };
