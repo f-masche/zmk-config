@@ -1,0 +1,66 @@
+name: Generate ZMK Keymap Drawing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "config/**/*.keymap"
+      - "config/**/*.dtsi"
+  workflow_dispatch:
+
+jobs:
+  generate-keymap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install keymap-drawer
+        shell: bash
+        run: pip install keymap-drawer
+
+      - name: Generate keymap drawing
+        run: |
+          mkdir -p images
+
+          keymap parse -z "config/splitkb_aurora_corne.keymap" > keymap.yaml
+          keymap draw keymap.yaml > images/keymap.svg
+
+      - name: Update README.md
+        run: |
+          sed -i '/<!-- KEYMAP-START -->/,/<!-- KEYMAP-END -->/d' README.md
+          cat >> README.md << 'EOF'
+
+          <!-- KEYMAP-START -->
+          ## Keymap Layout
+
+          ![Keymap](images/keymap.svg)
+
+          *This keymap diagram is automatically generated and updated.*
+          <!-- KEYMAP-END -->
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add images/keymap.svg README.md
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Auto-update keymap drawing [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
