@@ -123,13 +123,13 @@
             display-name = "Special";
         // -----------------------------------------------------------------------------------------
         // |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
-        // |     |  ä  |  ß  |     |     |     |     |  ü  |     |  ö  |     |     |
-        // |     |     |     |     |     |     |     |     |     |     |     |     |
-        //                   |     |     |     |     |     |     |     |
+        // |     |     |   ß  |     |     |     |     |     |     |     |     |   ü  |
+        // |     |     |      |     |     |     |     |     |     |     |  ü  |   ä  |
+        //                    |     |     |     |     |     |     |     |
             bindings = <
             &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-            &none &none &none &none &none &none &none &shift_morph &umlaut_u &umlaut_u_upper &none &shift_morph &umlaut_o &umlaut_o_upper &none &none
-            &none &shift_morph &umlaut_a &umlaut_a_upper &umlaut_ss &none &none &none &none &none &none &none &none &none
+            &none &none &none &none &none &none &none &none &none &none &none &shift_morph &umlaut_u &umlaut_u_upper
+            &none &none &umlaut_ss &none &none &none &none &none &none &none &shift_morph &umlaut_o &umlaut_o_upper &shift_morph &umlaut_a &umlaut_a_upper
                              &none &none &none &none &none &none
                 >;
         };
