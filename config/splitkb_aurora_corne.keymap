@@ -61,27 +61,11 @@
     };
 
     behaviors {
-        umlaut_a_mm: umlaut_a_mm {
+        shift_morph: shift_morph {
             compatible = "zmk,behavior-mod-morph";
-            label = "UMLAUT_A_MM";
-            #binding-cells = <0>;
-            bindings = <&umlaut_a>, <&umlaut_a_upper>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        
-        umlaut_o_mm: umlaut_o_mm {
-            compatible = "zmk,behavior-mod-morph";
-            label = "UMLAUT_O_MM";
-            #binding-cells = <0>;
-            bindings = <&umlaut_o>, <&umlaut_o_upper>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-        
-        umlaut_u_mm: umlaut_u_mm {
-            compatible = "zmk,behavior-mod-morph";
-            label = "UMLAUT_U_MM";
-            #binding-cells = <0>;
-            bindings = <&umlaut_u>, <&umlaut_u_upper>;
+            label = "SHIFT_MORPH";
+            #binding-cells = <2>;
+            bindings = <&macro_param_1to1>, <&macro_param_2to1>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
@@ -144,8 +128,8 @@
         //                   |     |     |     |     |     |     |     |
             bindings = <
             &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-            &none &none &none &none &none &none &none &umlaut_u_mm &none &umlaut_o_mm &none &none
-            &none &umlaut_a_mm &umlaut_ss &none &none &none &none &none &none &none &none &none
+            &none &none &none &none &none &none &none &shift_morph &umlaut_u &umlaut_u_upper &none &shift_morph &umlaut_o &umlaut_o_upper &none &none
+            &none &shift_morph &umlaut_a &umlaut_a_upper &umlaut_ss &none &none &none &none &none &none &none &none &none
                              &none &none &none &none &none &none
                 >;
         };
