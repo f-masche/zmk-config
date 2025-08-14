@@ -19,7 +19,7 @@ jobs:
 
       - name: Install pipx
         shell: bash
-        run: apt install pipx
+        run: sudo apt install pipx
 
       - name: Install keymap-drawer
         shell: bash
